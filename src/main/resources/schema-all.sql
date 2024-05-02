@@ -4,6 +4,6 @@ create table produto
 (
     id               serial,
     descricao             varchar(240),
-    quantidadeEstoque      int,
+    quantidade_estoque      int,
     valor           float
 )

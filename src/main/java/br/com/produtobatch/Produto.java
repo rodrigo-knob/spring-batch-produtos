@@ -1,6 +1,13 @@
-package br.com.produtobatch.produtobatch;
+package br.com.produtobatch;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Produto {
+
+    @Id
+    private Integer id;
     private String descricao;
     private Integer quantidadeEstoque;
     private Double valor;
@@ -12,6 +19,14 @@ public class Produto {
         this.descricao = descricao;
         this.quantidadeEstoque = quantidadeEstoque;
         this.valor = valor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescricao() {

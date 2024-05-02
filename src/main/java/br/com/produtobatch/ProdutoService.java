@@ -1,4 +1,4 @@
-package br.com.produtobatch.produtobatch;
+package br.com.produtobatch;
 
 
 import org.springframework.batch.core.Job;
@@ -35,8 +35,9 @@ public class ProdutoService {
         file.transferTo(targetLocation);
 
         JobParameters jobParameters = new JobParametersBuilder()
-                .addJobParameter("produtos", file.getOriginalFilename(), String.class, true)
-                .addJobParameter("produtosFile", "file:" + targetLocation, String.class).toJobParameters();
+//                .addJobParameter("produtos", file.getOriginalFilename(), String.class, true)
+                .addJobParameter("produtosFile", "file:" + targetLocation, String.class)
+                .toJobParameters();
 
         jobLauncher.run(job, jobParameters);
     }

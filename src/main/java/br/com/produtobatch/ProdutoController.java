@@ -1,4 +1,4 @@
-package br.com.produtobatch.produtobatch;
+package br.com.produtobatch;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

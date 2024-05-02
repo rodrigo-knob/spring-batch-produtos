@@ -1,4 +1,4 @@
-package br.com.produtobatch.produtobatch;
+package br.com.produtobatch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -17,10 +17,10 @@ import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilde
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -31,6 +31,9 @@ import javax.sql.DataSource;
 @Configuration
 @EnableScheduling
 public class BatchConfiguration {
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     @Bean
     public Job processarProduto(JobRepository jobRepository, Step step) {
@@ -64,7 +67,7 @@ public class BatchConfiguration {
                 .name("produtoItemReader")
                 .resource(resource)
                 .delimited()
-                .names("descricao", "quantidadeEstoque", "valor")
+                .names("id", "descricao", "quantidadeEstoque", "valor")
                 .fieldSetMapper(fieldSetMapper)
                 .build();
     }
@@ -74,13 +77,13 @@ public class BatchConfiguration {
         return new JdbcBatchItemWriterBuilder<Produto>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .dataSource(dataSource)
-                .sql("insert into produto (descricao, quantidadeEstoque, valor) values (:descricao, :quantidadeEstoque, :valor)")
+                .sql("insert into produto (descricao, quantidade_estoque, valor) values (:descricao, :quantidadeEstoque, :valor)")
                 .build();
     }
 
     @Bean
     public ItemProcessor<Produto, Produto> itemProcessor() {
-        return new ProdutoProcessor();
+        return new ProdutoProcessor(produtoRepository);
     }
 
     @Bean
