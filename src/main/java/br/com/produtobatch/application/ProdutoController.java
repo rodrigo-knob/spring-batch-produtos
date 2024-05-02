@@ -1,5 +1,6 @@
-package br.com.produtobatch;
+package br.com.produtobatch.application;
 
+import br.com.produtobatch.domain.service.ProdutoService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +20,4 @@ public class ProdutoController {
         return "Processamento iniciado";
     }
 
-    @GetMapping("/processar")
-    public String processar() {
-        produtoService.processarProdutosAgendados();
-        return "Processamento iniciado";
-    }
 }

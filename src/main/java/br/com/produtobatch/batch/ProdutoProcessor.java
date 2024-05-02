@@ -1,5 +1,7 @@
-package br.com.produtobatch;
+package br.com.produtobatch.batch;
 
+import br.com.produtobatch.domain.enitity.Produto;
+import br.com.produtobatch.infra.repository.ProdutoRepository;
 import org.springframework.batch.item.ItemProcessor;
 
 import java.util.Optional;

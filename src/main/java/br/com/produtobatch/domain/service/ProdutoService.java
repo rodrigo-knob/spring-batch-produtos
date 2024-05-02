@@ -1,4 +1,4 @@
-package br.com.produtobatch;
+package br.com.produtobatch.domain.service;
 
 
 import org.springframework.batch.core.Job;

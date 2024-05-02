@@ -1,4 +1,4 @@
-package br.com.produtobatch;
+package br.com.produtobatch.domain.enitity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
